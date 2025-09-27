@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Qwipo Futuristic Design System - Cinematic Glassmorphism */
+
+@layer base {
+  :root {
+    /* Futuristic Dark Base Colors */
+    --background: 240 6% 6%;  /* #0a0a0f equivalent */
+    --foreground: 210 40% 98%;
+    
+    /* Glassmorphism Cards */
+    --card: 240 10% 8%;  /* Semi-transparent dark */
+    --card-foreground: 210 40% 98%;
+    --glass: 240 10% 15% / 0.1;  /* Ultra transparent for glass effect */
+    --glass-border: 240 30% 80% / 0.2;  /* Subtle glass border */
+    
+    /* Neon Accent Colors */
+    --primary: 195 100% 50%;  /* Cyan glow #00BFFF */
+    --primary-foreground: 240 6% 6%;
+    --primary-glow: 195 100% 60%;  /* Brighter cyan for glow */
+    
+    --secondary: 270 100% 38%;  /* Purple glow #8A2BE2 */
+    --secondary-foreground: 210 40% 98%;
+    --secondary-glow: 270 100% 48%;
+    
+    --accent: 84 100% 54%;  /* Neon green #39FF14 */
+    --accent-foreground: 240 6% 6%;
+    --accent-glow: 84 100% 64%;
+    
+    /* UI Elements */
+    --muted: 240 10% 15%;
+    --muted-foreground: 240 5% 65%;
+    --border: 240 20% 20% / 0.3;
+    --input: 240 10% 12%;
+    --ring: 195 100% 50%;
+    
+    /* Special Effects */
+    --particle-1: 195 100% 50%;
+    --particle-2: 270 100% 38%;
+    --particle-3: 84 100% 54%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(240 6% 6%) 0%, hsl(240 10% 8%) 50%, hsl(195 100% 10%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(240 10% 15% / 0.1) 0%, hsl(195 50% 20% / 0.05) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
+    --gradient-neon-secondary: linear-gradient(90deg, hsl(var(--secondary)) 0%, hsl(var(--primary)) 50%, hsl(var(--accent)) 100%);
+    --gradient-neon-accent: linear-gradient(90deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 50%, hsl(var(--secondary)) 100%);
+    
+    /* Shadows & Glows */
+    --shadow-glass: 0 8px 32px hsl(240 10% 5% / 0.3);
+    --glow-primary: 0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.3);
+    --glow-secondary: 0 0 20px hsl(var(--secondary) / 0.5), 0 0 40px hsl(var(--secondary) / 0.3);
+    --glow-accent: 0 0 20px hsl(var(--accent) / 0.5), 0 0 40px hsl(var(--accent) / 0.3);
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--gradient-hero);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Effects */
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .glass-card {
+    @apply glass rounded-2xl p-6 transition-all duration-300;
+  }
+  
+  .glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glass), var(--glow-primary);
+  }
+  
+  /* Neon Glow Effects */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .glow-secondary {
+    box-shadow: var(--glow-secondary);
+  }
+  
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+  
+  /* Animated Backgrounds */
+  .particle-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .particle-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, hsl(var(--particle-1) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(var(--particle-2) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, hsl(var(--particle-3) / 0.1) 0%, transparent 50%);
+    animation: particle-float 20s ease-in-out infinite;
+  }
+  
+  /* Neon Text Effects */
+  .neon-text {
+    text-shadow: 
+      0 0 5px hsl(var(--primary) / 0.5),
+      0 0 10px hsl(var(--primary) / 0.5),
+      0 0 15px hsl(var(--primary) / 0.5);
+  }
+  
+  .neon-text-secondary {
+    text-shadow: 
+      0 0 5px hsl(var(--secondary) / 0.5),
+      0 0 10px hsl(var(--secondary) / 0.5),
+      0 0 15px hsl(var(--secondary) / 0.5);
+  }
+  
+  /* Interactive Elements */
+  .neon-border {
+    border: 1px solid hsl(var(--primary) / 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .neon-border:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: var(--glow-primary);
+  }
+  
+  /* Loading Animations */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  /* Animation Keyframes */
+  @keyframes particle-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(120deg); }
+    66% { transform: translateY(10px) rotate(240deg); }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { 
+      opacity: 1;
+      box-shadow: var(--glow-primary);
+    }
+    50% { 
+      opacity: 0.8;
+      box-shadow: var(--glow-primary), 0 0 60px hsl(var(--primary) / 0.4);
+    }
+  }
+  
+  @keyframes neon-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Animation Classes */
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scale-in 0.4s ease-out;
+  }
+  
+  .animate-neon-flicker {
+    animation: neon-flicker 1.5s ease-in-out infinite;
+  }
+  
+  /* Stagger Animation Delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  
+  /* Gradient Classes */
+  .gradient-neon {
+    background: var(--gradient-neon);
+  }
+  
+  .gradient-neon-secondary {
+    background: var(--gradient-neon-secondary);
+  }
+  
+  .gradient-neon-accent {
+    background: var(--gradient-neon-accent);
+  }
+}
